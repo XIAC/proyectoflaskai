@@ -1,4 +1,4 @@
-from flask_appbuilder  import ModelView
+from flask_appbuilder  import BaseView, ModelView, expose
 from flask_appbuilder.models.sqla.interface import SQLAInterface
 from . import appbuilder
 from .models import Categoria, Ingrediente
@@ -82,4 +82,19 @@ appbuilder.add_view(
         "Modulo Ingredientes",
         icon = "fa-cubes",
         category = "Inventario"
+)
+
+class DashboardView(BaseView):
+    route_base = "/dashboard"
+    default_view= "index"
+    
+    @expose("/")
+    def index(self):
+        return self.render_template('dashboard.html')
+    
+appbuilder.add_view(
+    DashboardView,
+    "Dashboard",
+    icon = "fa-cubes",
+    category = "Menu principal"
 )

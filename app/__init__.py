@@ -13,6 +13,10 @@ def create_app() -> Flask:
         from . import models
         from .models import Categoria, Ingrediente
         from . import views
+        
+        # registrar la view de ia
+        from .ai.asistente_ai import asistente_bp
+        app.register_blueprint(asistente_bp);
     return app
 
 app = create_app()
